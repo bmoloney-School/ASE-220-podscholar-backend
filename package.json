@@ -1,0 +1,17 @@
+{
+    "name": "440-project-new",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node ./index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.3",
+        "mongodb": "^4.5.0",
+        "sanitize": "^2.1.0",
+        "uuid": "^8.3.2"
+    }
+}
