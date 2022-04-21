@@ -64,6 +64,12 @@ router.get('/podcasts*/year/:yyyy*', (req, res, next) => {
     next();
 })
 
+router.get('/podcasts*/doi/:DOI*', (req, res, next) => {
+    res.locals.DOI = req.params.DOI;
+    console.log('Filtering by DOI: ', req.params.DOI);
+    next();
+})
+
 /***
  * catch all the routes that start with /podcasts/
  * Because of how I did this, malformed routes can sometimes be accepted but they are treated as normal paths so I dont think this is an issue.
@@ -80,6 +86,10 @@ router.get('/podcasts*', async function (req, res) {
     }
     if (res.locals.authorId) {
         query._id = mongo.ObjectId(res.locals.authorId);
+    }
+    // Currently Broken bc of / and . characters in doi
+    if (res.locals.DOI) {
+        query.DOI = res.locals.DOI;
     }
     var mongoResp = {};
     podcasts.find(query).toArray(function (err, result) {
@@ -158,6 +168,26 @@ router.get('/user/email/:e', async function (req, res) {
 
     const query = {
         email: email
+    };
+    const options = {
+        projection: { password: 0 },
+    }
+    let mongoResp = await users.findOne(query, options)
+    if (!mongoResp) {
+        res.status(400).send({ message: "User does not exist." })
+    }
+    else {
+        res.json(mongoResp)
+    }
+})
+
+router.get('/user/name/:fullname', async function (req, res) {
+    let name = req.params.fullname
+    let splitName = name.split('-');
+
+    const query = {
+        firstName: splitName[0],
+        lastName: splitName[1]
     };
     const options = {
         projection: { password: 0 },
