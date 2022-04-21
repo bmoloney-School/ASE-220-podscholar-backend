@@ -79,7 +79,7 @@ router.get('/podcasts*', async function (req, res) {
         query.year = res.locals.year
     }
     if (res.locals.authorId) {
-        query.authorId = res.locals.authorId
+        query._id = mongo.ObjectId(res.locals.authorId);
     }
     var mongoResp = {};
     users.find(query).toArray(function (err, result) {
