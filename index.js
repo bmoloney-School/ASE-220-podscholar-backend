@@ -82,7 +82,7 @@ router.get('/podcasts*', async function (req, res) {
         query._id = mongo.ObjectId(res.locals.authorId);
     }
     var mongoResp = {};
-    users.find(query).toArray(function (err, result) {
+    podcasts.find(query).toArray(function (err, result) {
         if (err) res.status(400).send({ message: "Podcast does not exist." });
         mongoResp.podcasts = result;
         res.json(mongoResp)
