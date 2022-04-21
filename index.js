@@ -2,6 +2,7 @@ const express = require('express');
 const mongo = require("mongodb");
 const { v4: uuidv4 } = require('uuid');
 var cors = require('cors');
+const { query } = require('express');
 
 // Express setup -- DO NOT TOUCH THIS IT WILL BREAK EVERYTHING
 const app = express();
@@ -236,6 +237,24 @@ router.delete('/user/:userId', async function (req, res) {
     let mongoResp = await users.deleteOne(query, options)
 
     res.send(mongoResp)
+})
+
+router.post('/login', async function (req, res) {
+    //TODO: Add verification
+
+    let user = req.body;
+    let query = {
+        email: user.email,
+        password: user.password
+    }
+    try {
+        result = await users.findOne(query);
+        console.log(result)
+        res.send({ userID: result._id });
+    }
+    catch (e) {
+        res.send(e)
+    }
 })
 
 //Main app functionality
