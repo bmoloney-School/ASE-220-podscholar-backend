@@ -170,6 +170,24 @@ router.get('/user/:userId', async function (req, res) {
     }
 })
 
+router.get('/user/email/:email', async function (req, res) {
+    let email = req.params.email
+
+    const query = {
+        email: email
+    };
+    const options = {
+        projection: { password: 0 },
+    }
+    let mongoResp = await users.findOne(query, options)
+    if (!mongoResp) {
+        res.status(400).send({ message: "User does not exist." })
+    }
+    else {
+        res.json(mongoResp)
+    }
+})
+
 router.delete('/user/:userId', async function (req, res) {
     let userId = req.params.userId
 
