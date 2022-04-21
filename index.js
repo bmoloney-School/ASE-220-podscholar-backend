@@ -132,11 +132,7 @@ router.put('/user/:id', async function (req, res) {
         update.$set.organization = req.body.organization;
     }
     if (req.body.title) {
-        isAuthor = true;
         update.$set.title = req.body.title;
-    }
-    if (req.body.isVerified && isAuthor) {
-        update.$set.isVerified = req.body.isVerified;
     }
     if (isAuthor) {
         update.$set.isAuthor = isAuthor;

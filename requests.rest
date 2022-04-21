@@ -12,14 +12,15 @@ content-type: application/json
 
 ###
 
-POST http://localhost:5000/user 
+PUT http://localhost:5000/api/user/62603f51779a89548e6cc0ec
 content-type: application/json
 
 {
-    "firstName":"John",
-    "lastName":"Doe",
-    "email":"test@email.com",
-    "password":"PlainTextPassword"
+"firstName":"Joseph",
+"lastName":"Stalin",
+"email":"dictator@email.com",
+"title":"aa",
+"organization":"aa"
 }
 
 ###
