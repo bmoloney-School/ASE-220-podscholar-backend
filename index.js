@@ -1,5 +1,5 @@
 const express = require('express');
-const { MongoClient } = require("mongodb");
+const mongo = require("mongodb");
 const { v4: uuidv4 } = require('uuid');
 var cors = require('cors');
 
@@ -11,7 +11,7 @@ const router = express.Router();
 
 // App values
 const uri = "mongodb+srv://6K9uMUAg2t6e:Ey4kype7VAYbsZG3@podscholarcluster.g5sjk.mongodb.net/podscholar?retryWrites=true&w=majority";
-const client = new MongoClient(uri);
+const client = new mongo.MongoClient(uri);
 var db;
 var podcasts;
 var users;
@@ -156,7 +156,7 @@ router.get('/user/:userId', async function (req, res) {
     let userId = req.params.userId
 
     const query = {
-        _id: userId
+        _id: new mongo.ObjectId(userId)
     };
     const options = {
         projection: { _id: 0, password: 0 },
