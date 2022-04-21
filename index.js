@@ -152,6 +152,25 @@ router.put('/user/:id', async function (req, res) {
     }
 })
 
+
+router.get('/user/email/:e', async function (req, res) {
+    let email = req.params.e
+
+    const query = {
+        email: email
+    };
+    const options = {
+        projection: { password: 0 },
+    }
+    let mongoResp = await users.findOne(query, options)
+    if (!mongoResp) {
+        res.status(400).send({ message: "User does not exist." })
+    }
+    else {
+        res.json(mongoResp)
+    }
+})
+
 router.get('/user/:userId', async function (req, res) {
     let userId = req.params.userId
     try {
@@ -173,24 +192,6 @@ router.get('/user/:userId', async function (req, res) {
         res.status(400).json({ message: "Invalid Reqeust" })
     }
 
-})
-
-router.get('/user/email/:e', async function (req, res) {
-    let email = req.params.e
-
-    const query = {
-        email: email
-    };
-    const options = {
-        projection: { password: 0 },
-    }
-    let mongoResp = await users.findOne(query, options)
-    if (!mongoResp) {
-        res.status(400).send({ message: "User does not exist." })
-    }
-    else {
-        res.json(mongoResp)
-    }
 })
 
 router.delete('/user/:userId', async function (req, res) {
