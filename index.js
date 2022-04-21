@@ -231,7 +231,7 @@ async function tryConnect() {
 }
 
 
-app.use('/', router);
+app.use('/api', router);
 
 async function main() {
     // if connection failed try again up to 10 times
