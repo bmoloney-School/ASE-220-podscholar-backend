@@ -156,10 +156,10 @@ router.get('/user/:userId', async function (req, res) {
     let userId = req.params.userId
 
     const query = {
-        userId: userId
+        _id: userId
     };
     const options = {
-        projection: { _id: 0, password: 0 },
+        projection: { password: 0 },
     }
     let mongoResp = await users.findOne(query, options)
     if (!mongoResp) {
