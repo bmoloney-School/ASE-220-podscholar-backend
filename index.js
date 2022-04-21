@@ -175,8 +175,8 @@ router.get('/user/:userId', async function (req, res) {
 
 })
 
-router.get('/user/email/:email', async function (req, res) {
-    let email = req.params.email
+router.get('/user/email/:e', async function (req, res) {
+    let email = req.params.e
 
     const query = {
         email: email
