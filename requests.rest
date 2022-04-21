@@ -1,23 +1,18 @@
-POST http://localhost:3001/podcast
+POST http://localhost:3000/podcast
 content-type: application/json
 
 {
-    "authorId": "d88ba5a4-b157-468b-91c3-4a2314344708",
-    "additionalAuthorNames": [
-        "Stevie Stephenson",
-        "Larry White",
-        "Jimmothy James"
-    ],
+    "authorId": "62603f51779a89548e6cc0ec",
     "description": "This is a podcast about a paper that is about some science thing",
     "DOI": "10.1111/dome.12082",
-    "publishedDate": "22/02/2020",
-    "tags": ["AI", "Artificial Intelligence", "Stocks"],
-    "category": "Computer Science"
+    "publishedDate": "22/03/2019",
+    "tags": ["TestTag1", "TestTag2", "TestTag3"],
+    "category": "Healthcare"
 } 
 
 ###
 
-POST http://localhost:3001/user 
+POST http://localhost:3000/user 
 content-type: application/json
 
 {
@@ -26,3 +21,12 @@ content-type: application/json
     "email":"test@email.com",
     "password":"PlainTextPassword"
 }
+
+###
+
+GET http://localhost:3000/podcasts/author/62603f51779a89548e6cc0ec/category/Computer-Science
+
+###
+
+
+

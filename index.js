@@ -13,7 +13,7 @@ const client = new MongoClient(uri);
 var db;
 var podcasts;
 var users;
-const port = 3001;
+const port = 3000;
 
 //shared middlware
 router.use((req, res, next) => {
@@ -43,9 +43,9 @@ router.get('/podcast/byId/:id', (req, res, next) => {
     res.json({ podcast: "Some Podcast" })
 })
 
-//This is a really neat way I found to have dynamic paths for searching podcasts
+//This is a way I found to have dynamic paths for searching podcasts
 router.get('/podcasts*/author/:authorId*', (req, res, next) => {
-    console.log('Filtering by author');
+    console.log('Filtering by author:', req.params.authorId);
     next();
 })
 
@@ -64,7 +64,7 @@ router.get('/podcasts*/year/:yyyy*', (req, res, next) => {
 /***
  * catch all the routes that start with /podcasts/
  * Because of how I did this, malformed routes can sometimes be accepted but they are treated as normal paths so I dont think this is an issue.
- * For example /v2/podcasts/AAAAAAAAAAAAAA would be accepted but it would be treated the same as /v2/podcasts
+ * For example /v2/podcasts/AAAAAAA would be accepted but it would be treated the same as /v2/podcasts
 */
 router.get('/podcasts*', async function (req, res) {
     const query = {};
@@ -79,7 +79,7 @@ router.get('/podcasts*', async function (req, res) {
         query.authorId = res.locals.authorId
     }
     var mongoResp = {};
-    users.find(query).toArray(function (err, result) {
+    podcasts.find(query).limit(20).toArray(function (err, result) {
         if (err) res.status(400).send({ message: "Podcast does not exist." });
         mongoResp.podcasts = result;
         res.json(mongoResp)
