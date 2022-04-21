@@ -250,7 +250,13 @@ router.post('/login', async function (req, res) {
     try {
         result = await users.findOne(query);
         console.log(result)
-        res.send({ userID: result._id });
+        if (result._id) {
+            res.send({ userID: result._id });
+        }
+        else {
+            res.send({ message: "invalid Login" })
+        }
+
     }
     catch (e) {
         res.send(e)
