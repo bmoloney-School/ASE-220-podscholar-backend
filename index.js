@@ -1,10 +1,12 @@
 const express = require('express');
 const { MongoClient } = require("mongodb");
 const { v4: uuidv4 } = require('uuid');
+var cors = require('cors');
 
 // Express setup -- DO NOT TOUCH THIS IT WILL BREAK EVERYTHING
 const app = express();
 app.use(express.json());
+app.use(cors())
 const router = express.Router();
 
 // App values
@@ -17,6 +19,7 @@ const port = process.env.PORT || 5000
 
 //shared middlware
 router.use((req, res, next) => {
+    res.header()
     console.log("Request Path:", req.originalUrl);
     next()
 })
