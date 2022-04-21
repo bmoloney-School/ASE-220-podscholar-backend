@@ -156,7 +156,7 @@ router.get('/user/:userId', async function (req, res) {
     let userId = req.params.userId
 
     const query = {
-        userId: userId
+        _id: userId
     };
     const options = {
         projection: { _id: 0, password: 0 },
@@ -165,7 +165,9 @@ router.get('/user/:userId', async function (req, res) {
     if (!mongoResp) {
         res.status(400).send({ message: "User does not exist." })
     }
-    res.json(mongoResp)
+    else {
+        res.json(mongoResp)
+    }
 })
 
 router.delete('/user/:userId', async function (req, res) {
