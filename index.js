@@ -119,7 +119,7 @@ router.post('/user', async function (req, res) {
 router.put('/user/:id', async function (req, res) {
     let userId = req.params.userId;
     const filter = {
-        userId: userId
+        _id: new mongo.ObjectId(userId)
     };
     const options = { upsert: false }
     let update = {
