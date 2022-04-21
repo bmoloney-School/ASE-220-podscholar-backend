@@ -159,7 +159,7 @@ router.get('/user/:userId', async function (req, res) {
         _id: new mongo.ObjectId(userId)
     };
     const options = {
-        projection: { _id: 0, password: 0 },
+        projection: { password: 0 },
     }
     let mongoResp = await users.findOne(query, options)
     if (!mongoResp) {
