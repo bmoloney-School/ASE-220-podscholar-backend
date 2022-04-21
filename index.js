@@ -154,20 +154,25 @@ router.put('/user/:id', async function (req, res) {
 
 router.get('/user/:userId', async function (req, res) {
     let userId = req.params.userId
+    try {
+        const query = {
+            _id: new mongo.ObjectId(userId)
+        };
+        const options = {
+            projection: { password: 0 },
+        }
+        let mongoResp = await users.findOne(query, options)
+        if (!mongoResp) {
+            res.status(400).send({ message: "User does not exist." })
+        }
+        else {
+            res.json(mongoResp)
+        }
+    }
+    catch (e) {
+        res.status(400).json({ message: "Invalid Reqeust" })
+    }
 
-    const query = {
-        _id: new mongo.ObjectId(userId)
-    };
-    const options = {
-        projection: { password: 0 },
-    }
-    let mongoResp = await users.findOne(query, options)
-    if (!mongoResp) {
-        res.status(400).send({ message: "User does not exist." })
-    }
-    else {
-        res.json(mongoResp)
-    }
 })
 
 router.get('/user/email/:email', async function (req, res) {
