@@ -93,7 +93,7 @@ router.get('/podcasts*', async function (req, res) {
         query.DOI = res.locals.DOI;
     }
     var mongoResp = {};
-    podcasts.find(query).toArray(function (err, result) {
+    podcasts.find(query).sort({ category: 1 }).toArray(function (err, result) {
         if (err) res.status(400).send({ message: "Podcast does not exist." });
         mongoResp.podcasts = result;
         res.json(mongoResp)
@@ -255,6 +255,21 @@ router.post('/login', async function (req, res) {
     }
 })
 
+router.get('/categories', async function (req, res) {
+    try {
+        result = await podcasts.aggregate(
+            [{
+                $group: {
+                    _id: '$category', count: { $sum: 1 }
+                }
+            }]
+        )
+        res.send(result)
+    }
+    catch (e) {
+        console.log("error")
+    }
+})
 //Main app functionality
 
 async function tryConnect() {

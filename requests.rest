@@ -1,4 +1,4 @@
-POST http://localhost:5000/podcast
+POST http://localhost:5000/api/podcast
 content-type: application/json
 
 {
@@ -7,7 +7,7 @@ content-type: application/json
     "DOI": "10.1111/dome.12082",
     "publishedDate": "22/03/2019",
     "tags": ["TestTag1", "TestTag2", "TestTag3"],
-    "category": "Healthcare"
+    "category": "Math"
 } 
 
 ###
@@ -16,16 +16,16 @@ PUT http://localhost:5000/api/user/6260c69b3a0ed95093b7db10
 content-type: application/json
 
 {
-"firstName":"aa",
-"lastName":"Stalin",
-"email":"dictator@email.com",
-"title":"aa",
-"organization":"aa"
+"firstName":"NewFirstName!",
+"lastName":"NewLastName!",
+"email":"Woahhhh@hhhh.com",
+"title":"Test Title",
+"organization":"EEEEEEE"
 }
 
 ###
 
-GET http://localhost:5000/podcasts/author/62603f51779a89548e6cc0ec/category/Computer-Science
+GET http://localhost:5000/api/podcasts
 
 ###
 
@@ -37,3 +37,7 @@ content-type: application/json
     "email": "test@email.com",
     "password": "PlainTextPassword"
 }
+
+###
+
+GET http://localhost:5000/api/categories 
