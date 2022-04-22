@@ -41,6 +41,43 @@ router.post('/podcast', async function (req, res) {
     }
 })
 
+router.put('/podcast', async function (req, res) {
+    let podcastId = req.params.id;
+    const filter = {
+        _id: new mongo.ObjectId(podcastId)
+    };
+    const options = { upsert: false }
+    let update = {
+        $set: {}
+    }
+    // There has to be a better way to do this.
+    if (req.body.title) {
+        update.$set.title = req.body.title;
+    }
+    if (req.body.journal) {
+        update.$set.journal = req.body.journal;
+    }
+    if (req.body.publishedDate) {
+        update.$set.publishedDate = req.body.publishedDate;
+    }
+    if (req.body.DOI) {
+        update.$set.DOI = req.body.DOI;
+    }
+    if (req.body.keywords) {
+        update.$set.keywords = req.body.keywords;
+    }
+
+    console.log(update);
+
+    try {
+        let result = await podcasts.updateOne(filter, update, options)
+        res.send(result);
+    }
+    catch (e) {
+        console.log("ERROR:\t" + e)
+        res.status(400).send({ message: "An error occured processing your request" });
+    }
+})
 
 //This returns a single podcast
 router.get('/podcast/byId/:id', async (req, res, next) => {
