@@ -17,11 +17,11 @@ PUT http://localhost:5000/api/user/6260c69b3a0ed95093b7db10
 content-type: application/json
 
 {
-"firstName":"NewFirstName!",
-"lastName":"NewLastName!",
-"email":"Woahhhh@hhhh.com",
-"title":"Test Title",
-"organization":"EEEEEEE"
+"firstName":"smokey",
+"lastName":"thebear",
+"email":"forest@fire.com",
+"title":"Bear",
+"organization":"The woods"
 }
 
 ###
@@ -41,7 +41,7 @@ content-type: application/json
 
 ###
 
-GET http://localhost:5000/api/categories 
+GET http://localhost:5000/api/podcasts/author/62621ea11a5b974b6ceea450 
 
 ###
 
@@ -60,3 +60,7 @@ content-type: application/json
 "DOI":"10.1111/dome.12082",
 "tags":"TestTag1,TestTag2,TestTag4"
 }
+
+###
+
+GET http://localhost:5000/api/user/62621ea11a5b974b6ceea450

@@ -105,6 +105,7 @@ router.get('/podcast/byId/:id', async (req, res, next) => {
 
 //This is a really neat way I found to have dynamic paths for searching podcasts
 router.get('/podcasts*/author/:authorId*', (req, res, next) => {
+    res.locals.authorId = req.params.authorId;
     console.log('Filtering by author');
     next();
 })
@@ -142,7 +143,7 @@ router.get('/podcasts*', async function (req, res) {
         query.year = res.locals.year
     }
     if (res.locals.authorId) {
-        query._id = mongo.ObjectId(res.locals.authorId);
+        query.authorId = res.locals.authorId;
     }
     // Currently Broken bc of / and . characters in doi
     if (res.locals.DOI) {
