@@ -6,6 +6,10 @@
     "scripts": {
         "start": "node ./index.js"
     },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/bmoloney-School/ASE-220-podscholar-backend.git"
+    },
     "author": "",
     "license": "ISC",
     "dependencies": {
@@ -14,5 +18,8 @@
         "mongodb": "^4.5.0",
         "sanitize": "^2.1.0",
         "uuid": "^8.3.2"
+    },
+    "engines": {
+        "node": "14.x"
     }
 }

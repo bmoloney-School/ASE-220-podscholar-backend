@@ -11,7 +11,11 @@ app.use(cors());
 const router = express.Router();
 
 // App values
-const uri = "mongodb+srv://6K9uMUAg2t6e:Ey4kype7VAYbsZG3@podscholarcluster.g5sjk.mongodb.net/podscholar?retryWrites=true&w=majority";
+const uri = process.env.connectionString || null;
+if (!uri) {
+    console.log("connection string not set - Exiting")
+    process.exit(-1);
+}
 const client = new mongo.MongoClient(uri);
 var db;
 var podcasts;
@@ -160,24 +164,11 @@ router.get('/podcasts*', async function (req, res) {
 router.get('/podcasts/byCategory', async function (req, res) {
     const query = {};
     const options = { upsert: false };
-    if (res.locals.category) {
-        query.category = res.locals.category
-    }
-    if (res.locals.year) {
-        query.year = res.locals.year
-    }
-    if (res.locals.authorId) {
-        query._id = mongo.ObjectId(res.locals.authorId);
-    }
-    // Currently Broken bc of / and . characters in doi
-    if (res.locals.DOI) {
-        query.DOI = res.locals.DOI;
-    }
     var mongoResp = {};
     podcasts.find(query).sort({ category: 1 }).toArray(function (err, result) {
         if (err) res.status(400).send({ message: "Podcast does not exist." });
         mongoResp.podcasts = result;
-        res.json(mongoResp)
+        res.json(mongoResp);
     })
 })
 
@@ -193,7 +184,7 @@ router.post('/user', async function (req, res) {
         res.send({ message: "User Created", result: result });
     }
     catch (e) {
-        res.send(e)
+        res.send(e);
     }
 })
 
