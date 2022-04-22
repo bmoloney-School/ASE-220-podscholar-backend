@@ -45,4 +45,18 @@ GET http://localhost:5000/api/categories
 
 ###
 
-GET http://localhost:5000/api/podcast/byId/6261ff9ba2c510e7645a0612
+GET http://localhost:5000/api/podcast/byId/6261ff8ca2c510e7645a0611
+
+
+###
+
+PUT http://localhost:5000/api/podcast/6261ff8ca2c510e7645a0611
+content-type: application/json
+
+{
+"title":"Some generic Title that explains what this is about",
+"journal":"Science Journal",
+"publishedDate":"2022-04-20",
+"DOI":"10.1111/dome.12082",
+"tags":"TestTag1,TestTag2,TestTag4"
+}

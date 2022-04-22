@@ -42,9 +42,9 @@ router.post('/podcast', async function (req, res) {
 })
 
 router.put('/podcast/:id', async function (req, res) {
-    let podcastId = req.params.id;
+    let id = req.params.id;
     const filter = {
-        _id: new mongo.ObjectId(podcastId)
+        _id: new mongo.ObjectId(id)
     };
     const options = { upsert: false }
     let update = {
@@ -66,8 +66,10 @@ router.put('/podcast/:id', async function (req, res) {
     if (req.body.keywords) {
         update.$set.keywords = req.body.keywords;
     }
-
-    console.log(update);
+    if (req.body.category) {
+        update.$set.category = req.body.category;
+    }
+    console.log(update, filter);
 
     try {
         let result = await podcasts.updateOne(filter, update, options)
