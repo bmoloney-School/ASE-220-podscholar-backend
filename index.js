@@ -41,7 +41,7 @@ router.post('/podcast', async function (req, res) {
     }
 })
 
-router.put('/podcast', async function (req, res) {
+router.put('/podcast/:id', async function (req, res) {
     let podcastId = req.params.id;
     const filter = {
         _id: new mongo.ObjectId(podcastId)
