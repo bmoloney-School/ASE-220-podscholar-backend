@@ -43,8 +43,25 @@ router.post('/podcast', async function (req, res) {
 
 
 //This returns a single podcast
-router.get('/podcast/byId/:id', (req, res, next) => {
-    res.json({ podcast: "Some Podcast" })
+router.get('/podcast/byId/:id', async (req, res, next) => {
+    let id = req.params.id
+    try {
+        const query = {
+            _id: new mongo.ObjectId(id)
+        };
+        const options = {}
+        let mongoResp = await podcasts.findOne(query, options)
+        if (!mongoResp) {
+            res.status(400).send({ message: "User does not exist." })
+        }
+        else {
+            res.json(mongoResp)
+        }
+    }
+    catch (e) {
+        res.status(400).json({ message: "Invalid Reqeust" })
+    }
+
 })
 
 //This is a really neat way I found to have dynamic paths for searching podcasts

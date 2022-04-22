@@ -42,3 +42,7 @@ content-type: application/json
 ###
 
 GET http://localhost:5000/api/categories 
+
+###
+
+GET http://localhost:5000/api/podcast/byId/6261ff9ba2c510e7645a0612
