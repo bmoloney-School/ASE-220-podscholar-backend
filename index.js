@@ -93,6 +93,30 @@ router.get('/podcasts*', async function (req, res) {
         query.DOI = res.locals.DOI;
     }
     var mongoResp = {};
+    podcasts.find(query).sort({ publishedDate: -1 }).toArray(function (err, result) {
+        if (err) res.status(400).send({ message: "Podcast does not exist." });
+        mongoResp.podcasts = result;
+        res.json(mongoResp)
+    })
+})
+
+router.get('/podcasts/byCategory', async function (req, res) {
+    const query = {};
+    const options = { upsert: false };
+    if (res.locals.category) {
+        query.category = res.locals.category
+    }
+    if (res.locals.year) {
+        query.year = res.locals.year
+    }
+    if (res.locals.authorId) {
+        query._id = mongo.ObjectId(res.locals.authorId);
+    }
+    // Currently Broken bc of / and . characters in doi
+    if (res.locals.DOI) {
+        query.DOI = res.locals.DOI;
+    }
+    var mongoResp = {};
     podcasts.find(query).sort({ category: 1 }).toArray(function (err, result) {
         if (err) res.status(400).send({ message: "Podcast does not exist." });
         mongoResp.podcasts = result;

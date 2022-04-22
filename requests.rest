@@ -2,12 +2,13 @@ POST http://localhost:5000/api/podcast
 content-type: application/json
 
 {
-    "authorId": "62603f51779a89548e6cc0ec",
+    "authorId": "6260c69b3a0ed95093b7db10",
     "description": "This is a podcast about a paper that is about some science thing",
     "DOI": "10.1111/dome.12082",
     "publishedDate": "22/03/2019",
-    "tags": ["TestTag1", "TestTag2", "TestTag3"],
-    "category": "Math"
+    "tags": ["TestTag1", "TestTag2", "TestTag4"],
+    "category": "Engineering",
+    "Title": "Some generic Title1 that explains what this is about"
 } 
 
 ###
