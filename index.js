@@ -117,25 +117,21 @@ router.post('/user', async function (req, res) {
 })
 
 router.put('/user/:id', async function (req, res) {
-    let userId = req.params.userId;
+    let userId = req.params.id;
     const filter = {
         _id: new mongo.ObjectId(userId)
     };
+    console.log(filter)
     const options = { upsert: false }
     let update = {
         $set: {}
     }
     // There has to be a better way to do this.
-    isAuthor = false;
     if (req.body.organization) {
-        isAuthor = true;
         update.$set.organization = req.body.organization;
     }
     if (req.body.title) {
         update.$set.title = req.body.title;
-    }
-    if (isAuthor) {
-        update.$set.isAuthor = isAuthor;
     }
     if (req.body.email) {
         update.$set.email = req.body.email;

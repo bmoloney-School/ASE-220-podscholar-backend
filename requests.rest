@@ -12,11 +12,11 @@ content-type: application/json
 
 ###
 
-PUT http://localhost:5000/api/user/62603f51779a89548e6cc0ec
+PUT http://localhost:5000/api/user/6260c69b3a0ed95093b7db10
 content-type: application/json
 
 {
-"firstName":"Joseph",
+"firstName":"aa",
 "lastName":"Stalin",
 "email":"dictator@email.com",
 "title":"aa",
